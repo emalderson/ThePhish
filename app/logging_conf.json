@@ -1,0 +1,37 @@
+{
+	"version": 1,
+	"formatters": { 
+		"formatter_console": { 
+			"format": "[%(levelname)s]_[%(name)s]: %(message)s"
+		}
+	},
+	"handlers": { 
+		"handler_console": { 
+			"level": "INFO",
+			"formatter": "formatter_console",
+			"class": "logging.StreamHandler",
+			"stream": "ext://sys.stdout"
+		}
+	},
+	"loggers": { 
+		"": {  
+			"handlers": ["handler_console"],
+			"level": "INFO"
+		},
+		"list_emails": { 
+			"handlers": ["handler_console"],
+			"level": "DEBUG",
+			"propagate": false
+		},
+		"case_from_email": { 
+			"handlers": ["handler_console"],
+			"level": "DEBUG",
+			"propagate": false
+		},
+		"run_analysis": { 
+			"handlers": ["handler_console"],
+			"level": "DEBUG",
+			"propagate": false
+		}
+	}
+}

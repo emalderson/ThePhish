@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>ThePhish</title>
+	<link rel="icon" type="image/png" sizes="1000x999" href="../static/assets/img/logo_rounded.png">
+	<link rel="stylesheet" href="../static/assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Courier+Prime">
+	<link rel="stylesheet" href="../static/assets/fonts/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+		<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="color: var(--bs-gray-dark);background: linear-gradient(135deg, rgb(40,106,149) 0%, rgb(255,255,255) 100%), rgb(40,106,149);max-width: 114px;">
+			<div class="container d-flex flex-column p-0">
+				<hr class="sidebar-divider my-0">
+				<ul class="navbar-nav text-light" id="accordionSidebar">
+					<li class="nav-item"><a class="nav-link active" href="/" style="max-width: 114px;" target="_blank" rel="noopener noreferrer"><img class="img-fluid" data-bss-hover-animate="bounce" src="../static/assets/img/logo_rounded.png" style="margin-top: 0px;margin-left: 0px;"></a></li>
+					<li class="nav-item"><a class="nav-link" href="http://thehive:9000" style="max-width: 114px;" target="_blank" rel="noopener noreferrer"><img class="img-fluid" data-bss-hover-animate="bounce" src="../static/assets/img/thehive.png" style="margin-right: 0px;margin-left: 0px;"></a></li>
+					<li class="nav-item"><a class="nav-link" href="http://cortex:9001" style="max-width: 114px;" target="_blank" rel="noopener noreferrer"><img class="img-fluid" data-bss-hover-animate="bounce" src="../static/assets/img/cortex.png" style="transform: translate(0px);"></a></li>
+					<li class="nav-item"><a class="nav-link" href="https://misp" style="max-width: 114px;" target="_blank" rel="noopener noreferrer"><img class="img-fluid" data-bss-hover-animate="bounce" src="../static/assets/img/misp.png" style="transform: translate(0px);"></a></li>
+				</ul>
+				<div class="text-center d-none d-md-inline"></div>
+			</div>
+		</nav>
+		<div class="d-flex flex-column" id="content-wrapper">
+			<div id="content">
+				<div class="container-fluid col-xxl-7 col-xl-7 col-lg-8 col-md-9"><img class="img-fluid" src="../static/assets/img/ThePhish_logo.png" style="margin-bottom: 10px;margin-top: 10px;"></div>
+				<div class="container-fluid">
+					<div class="card shadow">
+						<div class="card-header py-3" id="cardHeader" style="background: rgb(248, 249, 252);"><button class="btn btn-primary border rounded disabled col-12" id="listMailsBtn" type="button" style="background: rgb(40,106,149);font-size: 20px;" onclick="list_emails()">List emails</button><div id="progressBar" class="progress d-none" style="height: 44px;font-size:20px">
+	<div class="progress-bar progress-bar-striped progress-bar-animated bg-info" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+</div></div>
+						<div class="card-body" id="cardBodyTableRes">
+							<div class="card textwhite bg-secondary text-white shadow d-none" id="logText" style="border-width: 3px;border-color: rgb(68,68,69);height: 250px;margin-bottom: 0px;">
+								<div class="card-body overflow-auto" style="background: #31354a;">
+									<p class="m-0" style="font-family: 'Share Tech Mono', monospace;"></p>
+								</div>
+							</div><div id=descDiv>
+<h1>Welcome to ThePhish!</h1>
+<p style="font-size: 18px;">ThePhish is an automated phishing email analysis tool that is able to analyze suspicious emails in EML format. It automates the analysis through TheHive and Cortex and gives a verdict about the maliciousness of the email.</p>
+<p style="font-size: 18px;">To use ThePhish, the analyst can click on the "List emails" button at the top of the page and select an email to analyze from the table.</p>
+<p style="font-size: 18px;">In case of uncertainty, the email will be marked as <span style="color: #ffcc00;">suspicious</span> and the analyst can go directly on TheHive and Cortex using the buttons on the left-hand side of the page to see the details and gain more insights in order to give a final verdict. Otherwise, the email will be marked either as <span style="color: #ff0000;">malicious</span> or <span style="color: #00ff00;">safe</span>, but the analyst can go check on TheHive and Cortex the information about the analysis anyway.</p>
+<p style="font-size: 18px;">If the email is marked as malicious, the case opened on TheHive by ThePhish will be closed and exported to MISP.</p>
+<p style="font-size: 18px;">The user who sent the suspicious email will be notified by ThePhish when the analysis of his email starts and when it ends.</p>
+<p style="font-size: 18px;">In order for the email to be analyzed by ThePhish, the user must forward it as an attachment in EML format to the designated email address.</p>
+
+</div>
+							<div id="divResult" class="d-none" style="border-radius: 0px;margin-top: 17px;">
+								<p class="text-center overflow-auto" style="background: rgb(255,212,37);height: 44px;line-height: 44px;color: rgb(255,255,255);margin-bottom: 0px;font-size: 20px;border-radius: 0px;border-top-left-radius: 5px;border-top-right-radius: 5px;"></p>
+								<p class="text-center overflow-auto" style="background: rgb(227, 230, 240);color: rgb(133, 135, 150);font-size: 20px;height: 130px;border-radius: 0px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;"></p>
+							</div><a class="card-link btn btn-primary border rounded d-none" id="goBackLink" href="/" style="background: rgb(40,106,149);font-size: 20px;"><i class="fa fa-arrow-left"></i>&nbsp; Go back to analyze a new e-mail</a>
+							<div class="table-responsive table mt-2 d-none" data-aos="fade" id="divDataTable" role="grid" aria-describedby="dataTable_info" style="height: auto;border-top-left-radius: 5px;border-top-right-radius: 5px;">
+								<table class="table table-striped table-hover my-0" id="dataTable">
+									<thead style="background: rgb(40,106,149);color: rgb(255,255,255);font-size: 20px;">
+										<tr style="background: var(--bs-table-bg);">
+											<th>UID</th>
+											<th>Date</th>
+											<th>From</th>
+											<th>Subject</th>
+											<th>Message</th>
+											<th>Subject of the email to analyze</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="bg-white sticky-footer">
+				<div class="container my-auto">
+					<div class="text-center my-auto copyright"><span></span></div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+	<script src="../static/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../static/assets/js/bs-init.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+	<script src="../static/assets/js/theme.js"></script>
+	<script src="../static/assets/js/thephish.js"></script>
+</body>
+
+</html>
