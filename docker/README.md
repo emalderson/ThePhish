@@ -284,7 +284,7 @@ This is because after some troubleshooting, it emerged that the Firefox browser 
 
 You're all set now! When a user sends an email to the email address that you created, it will appear in the list of emails to analyze and you can select it for the analysis.
 However, in order to make ThePhish work better, you should also configure the whitelist and the analyzer levels that best suit your needs by using the files `thephish_conf_files/analyzers_level_conf.json` and `thephish_conf_files/whitelist.json`. In order to learn how to do that, please refer to these two sections in the main installation guide: 
-- [Analyzer levels](https://github.com/emalderson/ThePhish/blob/main/README.md#configure-the-analyzers)
-- [Whitelist](https://github.com/emalderson/ThePhish#use-the-whitelist)
+- [Analyzer levels](https://github.com/emalderson/ThePhish/blob/master/README.md#configure-the-analyzers)
+- [Whitelist](https://github.com/emalderson/ThePhish/blob/master/README.md#use-the-whitelist)
 
 **:warning:  WARNING: This procedure will install ThePhish and the required services with a minimal configuration that should not be used in production. If you want to use ThePhish in a production environment, please refer to the official installation guides of TheHive, Cortex and MISP, or to the documentation of the used images.**
