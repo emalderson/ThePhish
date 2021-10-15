@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+**Work environment**
+
 | Question                   | Answer                                |
 | -------------------------- | ------------------------------------- |
 | OS version (server)        | Debian, Ubuntu, CentOS, RedHat, ...   |
@@ -27,4 +29,5 @@ assignees: ''
 | Docker Compose version | If applicable |
 
 **Question**
+
 Describe the question/requirement as clearly as possible.

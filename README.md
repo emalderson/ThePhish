@@ -470,4 +470,4 @@ ThePhish is an open-source and free software released under the [AGPL](https://g
 
 I would like to thank Xavier Mertens (xme) for having developed [IMAP2TheHive](https://github.com/xme/dockers/tree/master/imap2thehive) and published it on GitHub, since it has been the initial spark that led to the development of this project and from which the code of ThePhish has taken a cue.
 
-I would also like to thank Gianmarco, Alberto and Bernardina, who helped me in the early stages of the development of the application with the ideas, the initial deployment, the first tests and the presentation of the first beta version.
+I would also like to thank [gianpor](https://github.com/gianpor), [MrFelpon](https://github.com/MrFelpon) and [xdinax](https://github.com/xdinax), who helped me in the early stages of the development of the application with the ideas, the initial deployment and the first tests.

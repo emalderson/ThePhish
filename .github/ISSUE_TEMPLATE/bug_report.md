@@ -8,7 +8,10 @@ assignees: ''
 ---
 
 **Describe the bug**
+
 A clear and concise description of what the bug is.
+
+**Work environment**
 
 | Question                   | Answer                                |
 | -------------------------- | ------------------------------------- |
@@ -30,6 +33,7 @@ A clear and concise description of what the bug is.
 | Docker Compose version | If applicable |
 
 **To Reproduce**
+
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
@@ -37,13 +41,17 @@ Steps to reproduce the behavior:
 4. See error
 
 **Expected behavior**
+
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
+
 If applicable, add screenshots to help explain your problem.
 
 **Additional context**
+
 Add any other context about the problem here.
 
 **Possible solutions**
+
 Keep this section if you have suggestions on how to solve the problem, otherwise delete it.
