@@ -1,10 +1,11 @@
 
+
 <!-- omit in toc -->
 # Contributing to ThePhish
 
-First off, thanks for taking the time to contribute! ❤️
+First off, thanks for taking the time to contribute!
 
-All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions. 🎉
+All types of contributions are encouraged and valued. See the [Table of Contents](#table-of-contents) for different ways to help and details about how this project handles them. Please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions.
 
 > And if you like the project, but just don't have time to contribute, that's fine. There are other easy ways to support the project and show your appreciation, which we would also be very happy about:
 > - Star the project
@@ -20,6 +21,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
 - [I Want To Contribute](#i-want-to-contribute)
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Enhancements](#suggesting-enhancements)
+  - [Creating a Pull Request](#creating-a-pull-request)
 
 
 
@@ -111,6 +113,24 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/emalde
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
 - You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. 
 - **Explain why this enhancement would be useful** to most ThePhish users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
+
+### Creating a Pull Request
+
+If you want to fix a bug or propose a new feature you can also create a Pull Request.
+
+#### Before Creating a Pull Request
+
+- Check if there is an [Issue](https://github.com/emalderson/ThePhish/issues?q=is%3Aissue) that highlights the same problem that you want to solve or that requests the same feature that you want to implement. If this is the case, then remember to link the Issue in your Pull Request.
+- Check if a similar [Pull Request](https://github.com/emalderson/ThePhish/pulls) has already been created.
+- Consider creating an Issue before creating a Pull Request.
+
+#### How Do I Submit a Good Pull Request?
+
+- Use a **clear and descriptive title** for the Pull Request.
+- Follow this [Pull Request template](https://github.com/emalderson/ThePhish/blob/master/.github/pull_request_template.md).
+- **Link the Issue** related to this Pull Request, if present.
+- Provide a **step-by-step description of the solution you proposed** in as many details as possible. 
+- **Use comments** in the code that you provide.
 
 <!-- omit in toc -->
 ## Attribution
