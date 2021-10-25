@@ -8,6 +8,13 @@
 
 ThePhish is an automated phishing email analysis tool based on [TheHive](https://github.com/TheHive-Project/TheHive), [Cortex](https://github.com/TheHive-Project/Cortex/) and [MISP](https://github.com/MISP/MISP). It is a web application written in Python 3 and based on Flask that automates the entire analysis process starting from the extraction of the observables from the header and the body of an email to the elaboration of a verdict which is final in most cases. In addition, it allows the analyst to intervene in the analysis process and obtain further details on the email being analyzed if necessary. In order to interact with TheHive and Cortex, it uses [TheHive4py](https://github.com/TheHive-Project/TheHive4py) and [Cortex4py](https://github.com/TheHive-Project/Cortex4py), which are the Python API clients that allow using the REST APIs made available by TheHive and Cortex respectively.
 
+![OS](https://img.shields.io/badge/OS-Linux-red?style=flat&logo=linux)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python%203.8-1f425f.svg?logo=python)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-available-green.svg?style=flat&logo=docker)](https://github.com/emalderson/ThePhish/tree/master/docker)
+[![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/emalderson/ThePhish)
+[![GitHub](https://img.shields.io/github/license/emalderson/ThePhish)](https://github.com/emalderson/ThePhish/blob/master/LICENSE)
+[![Documentation](https://img.shields.io/badge/Documentation-complete-green.svg?style=flat)](https://github.com/emalderson/ThePhish)
+
 ## Table of contents
 
 * [Overview](#overview)
@@ -174,7 +181,9 @@ In order to install, configure and integrate TheHive, Cortex and MISP instances,
  - [Cortex documentation](https://github.com/TheHive-Project/CortexDocs)
  - [MISP documentation](https://www.misp-project.org/documentation/)
 
-It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. [Here](https://support.google.com/accounts/answer/185833?hl=en) is explained the procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails.
+It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. The procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails is explained [here](https://support.google.com/accounts/answer/185833?hl=en).
+
+This installation procedure has been tested on a VM running Ubuntu 20.04.3 LTS with Python 3.8 installed and the versions of TheHive, Cortex and MISP shown in this [docker-compose.yml](https://github.com/emalderson/ThePhish/blob/master/docker/docker-compose.yml) file.
 
 Once TheHive, Cortex and MISP are configured and listening at a certain URL and the email address is ready to use, you can install and configure ThePhish. 
 
@@ -247,11 +256,15 @@ Once TheHive, Cortex and MISP are configured and listening at a certain URL and 
 	 - In the *misp* part you only have to set the ID given to the MISP instance.
 	 - In the *case* part you can set the default TLP and PAP levels for the cases created by ThePhish and also the tags that will be applied to them at their creation.
 	 
-	 You can learn how to create a user on TheHive and obtain its API key [here](https://docs.thehive-project.org/thehive/legacy/thehive3/admin/admin-guide/) or [here](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-thehive-container). Similarly, you can learn how to create a user on Cortex and obtain its API key [here](https://github.com/TheHive-Project/CortexDocs/blob/master/admin/admin-guide.md#users) or [here](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-cortex-container).
+	 You can learn how to create an organization and a user with `org-admin` role in that organization on TheHive and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-thehive-container) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/legacy/thehive3/admin/admin-guide/). Similarly, you can learn how to create an organization and a user with `read, analyze` roles in that organization on Cortex and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-cortex-container) or [here (Cortex documentation)](https://github.com/TheHive-Project/CortexDocs/blob/master/admin/admin-guide.md#users).
 	 
-	 The URLs and the IDs that are set in this file must be the same that are set in the configuration file of TheHive named `application.conf`. Indeed, this file is used to integrate TheHive with Cortex and MISP. You can learn how to do that for Cortex [here](https://docs.thehive-project.org/thehive/installation-and-configuration/configuration/connectors-cortex/) or [here](https://github.com/emalderson/ThePhish/blob/master/docker/README.md#integrate-thehive-with-cortex), while for MISP you can go [here](https://docs.thehive-project.org/thehive/installation-and-configuration/configuration/connectors-misp/) or [here](https://github.com/emalderson/ThePhish/blob/master/docker/README.md#integrate-thehive-with-misp).
+	 The URLs and the IDs that are set in this file must be the same that are set in the configuration file of TheHive named `application.conf`, which contains a part related to Cortex and a part related to MISP. The parameters that you should look for are `name` and `url` in both parts, which correspond to the IDs and the URLs of the Cortex and MISP instances. The IDs can also be found in the *About* window on the web interface of TheHive. An example where the Cortex ID is the string `local` and the MISP ID is the string `MISP THP` is shown in the following figure:
 
-	The URLs at which TheHive, Cortex and MISP instances are reachable should also be replaced in the file `templates/index.html` so that the buttons on the web interface will be able to reach them. To do that, replace the last three `href` of this portion of code:
+	 <img src="pictures/about_IDs.png" width="400">
+
+	 The file `application.conf` is used to integrate TheHive with Cortex and MISP. You can learn how to set up the integration with Cortex [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/blob/master/docker/README.md#integrate-thehive-with-cortex) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/installation-and-configuration/configuration/connectors-cortex/), while for the integration with MISP you can go [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/blob/master/docker/README.md#integrate-thehive-with-misp) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/installation-and-configuration/configuration/connectors-misp/).
+
+	 The URLs at which TheHive, Cortex and MISP instances are reachable should also be replaced in the file `templates/index.html` so that the buttons on the web interface will be able to reach them. To do that, replace the last three `href` of this portion of code:
 	```html
 	<ul class="navbar-nav text-light" id="accordionSidebar">
 	    <li class="nav-item"><a class="nav-link active" href="/" style="max-width: 114px;" target="_blank" rel="noopener noreferrer"><img class="img-fluid" data-bss-hover-animate="bounce" src="../static/assets/img/logo_rounded.png" style="margin-top: 0px;margin-left: 0px;"></a></li>
@@ -379,7 +392,7 @@ The analyzers emphasized in *italic* are the ones for which the levels have been
 
 ### Enable the *MISP* analyzer
 
-In order to integrate Cortex with MISP, you must activate the *MISP_2_1* analyzer and configure it with the authorization key of the user created on MISP that Cortex will use to interact with MISP. This means that a user must be created on MISP beforehand (you can learn how to do that [here](https://www.circl.lu/doc/misp/administration/#users) or [here](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-misp-container)).
+In order to integrate Cortex with MISP, you must activate the *MISP_2_1* analyzer and configure it with the authentication key of the user created on MISP that Cortex will use to interact with MISP. This means that an organization and a user with `sync_user` role in that organization must be created on MISP beforehand (you can learn how to do that and obtain the authentication key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-misp-container) or [here (MISP documentation)](https://www.circl.lu/doc/misp/administration/#users).
 
 ### Enable the *Yara* analyzer
 
