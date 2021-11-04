@@ -34,6 +34,7 @@ ThePhish is an automated phishing email analysis tool based on [TheHive](https:/
 * [Use the whitelist](#use-the-whitelist)
 * [Contribution to TheHive4py](#contribution-to-thehive4py)
 * [License](#license)
+* [Who talks about ThePhish](#who-talks-about-thephish)
 * [Credits](#credits)
 
 
@@ -49,7 +50,7 @@ The following diagram shows how ThePhish works at high-level:
  4. ThePhish extracts all the observables from the email and creates a case on TheHive. The observables are analyzed thanks to Cortex and its analyzers.
  5. ThePhish calculates a verdict based on the verdicts of the analyzers.
  6. If the verdict is final, the case is closed and the user is notified. In addition, if it is a malicious email, the case is exported to MISP.
- 7. If the verdict is not final, the analyst's intervention is required. He must review the case on TheHive along with the results given by the various analyzers to formulate a verdict, then it can send the notification to the user, optionally export the case to MISP and close the case.
+ 7. If the verdict is not final, the analyst's intervention is required. He must review the case on TheHive along with the results given by the various analyzers to formulate a verdict, then he can send the notification to the user, optionally export the case to MISP and close the case.
 
 
 ## ThePhish example usage
@@ -479,8 +480,13 @@ ThePhish uses a great feature of TheHive which is the possibility of exporting a
 
 ThePhish is an open-source and free software released under the [AGPL](https://github.com/emalderson/ThePhish/blob/master/LICENSE) (Affero General Public License).
 
+## Who talks about ThePhish
+- SecSI - https://secsi.it/lab/thephish-an-automated-phishing-email-analysis-tool/
+
 ## Credits
 
-I would like to thank Xavier Mertens (xme) for having developed [IMAP2TheHive](https://github.com/xme/dockers/tree/master/imap2thehive) and published it on GitHub, since it has been the initial spark that led to the development of this project and from which the code of ThePhish has taken a cue.
+This project started in 2020 and an early and incomplete version of it was presented as my final work for the graduation at the [Cybersecurity HackAdemy](https://www.cyberhackademy.unina.it/en/home-page/) organized by the University of Naples Federico II. For that, I would like to thank my team that was composed by [gianpor](https://github.com/gianpor), [MrFelpon](https://github.com/MrFelpon) and [xdinax](https://github.com/xdinax), who helped me in the early stages of the development of the application with the initial deployment and the first tests. 
 
-I would also like to thank [gianpor](https://github.com/gianpor), [MrFelpon](https://github.com/MrFelpon) and [xdinax](https://github.com/xdinax), who helped me in the early stages of the development of the application with the ideas, the initial deployment and the first tests.
+Then I completely redesigned the tool in terms of functionality, logo and UI, added the support for Docker and wrote a thorough documentation in order to be presented as the final thesis for my master's degree in computer engineering in 2021 at the University of Naples Federico II with supervisor [spromano](https://github.com/spromano).
+
+I would also like to thank Xavier Mertens (xme) for having developed [IMAP2TheHive](https://github.com/xme/dockers/tree/master/imap2thehive) and published it on GitHub, since it has been the initial spark that led to the development of this project and from which the code of ThePhish has taken a cue.
