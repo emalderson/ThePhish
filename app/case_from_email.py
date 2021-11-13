@@ -140,7 +140,6 @@ def obtain_eml(connection, mail_uid, wsl):
 		# Variable that will contain the internal EML file
 		internal_msg = None
 		
-
 		# Walk the multipart structure of the email (now only the EML part is needed)
 		for part in msg.walk():
 			mimetype = part.get_content_type()
@@ -195,9 +194,6 @@ def parse_eml(internal_msg, wsl):
 	log.info("Analyzing attached message with subject: {}".format(subject_field))
 	wsl.emit_info("Analyzing attached message with subject: {}".format(subject_field))
 
-	# EML file to add to the case as an observable
-	eml_file = None
-
 	# List of attachments of the internal email
 	attachments = []
 
@@ -229,7 +225,6 @@ def parse_eml(internal_msg, wsl):
 		'X-Originating-Email'
 	]
 	
-	
 	# Extract header fields 
 	parser = email.parser.HeaderParser()
 	header_fields = parser.parsestr(internal_msg.as_string())
@@ -246,24 +241,26 @@ def parse_eml(internal_msg, wsl):
 	
 	# Walk the multipart structure of the internal email 
 	for part in internal_msg.walk():
-		# Extract the observables from the body (from both text/plain and text/html parts) using the search_observables function
-		if part.get_content_type() == "text/plain":
-			try:
-				body = part.get_payload(decode=True).decode()
-			except UnicodeDecodeError:
-				body = part.get_payload(decode=True).decode('ISO-8859-1')
-			observables_body.extend(search_observables(body, wsl))
-		elif part.get_content_type() == "text/html":
-			try:
-				html = part.get_payload(decode=True).decode()
-			except UnicodeDecodeError:
-				html = part.get_payload(decode=True).decode('ISO-8859-1')
-			# Handle URL encoding
-			html_urldecoded = urllib.parse.unquote(html.replace("&amp;", "&"))
-			observables_body.extend(search_observables(html_urldecoded, wsl))
+		mimetype = part.get_content_type()
+		content_disposition = part.get_content_disposition()
+		if content_disposition != "attachment":
+			# Extract the observables from the body (from both text/plain and text/html parts) using the search_observables function
+			if mimetype == "text/plain":
+				try:
+					body = part.get_payload(decode=True).decode()
+				except UnicodeDecodeError:
+					body = part.get_payload(decode=True).decode('ISO-8859-1')
+				observables_body.extend(search_observables(body, wsl))
+			elif mimetype == "text/html":
+				try:
+					html = part.get_payload(decode=True).decode()
+				except UnicodeDecodeError:
+					html = part.get_payload(decode=True).decode('ISO-8859-1')
+				# Handle URL encoding
+				html_urldecoded = urllib.parse.unquote(html.replace("&amp;", "&"))
+				observables_body.extend(search_observables(html_urldecoded, wsl))
 		# Extract attachments
 		else:
-			mimetype = part.get_content_type()
 			filename = part.get_filename()
 			if filename and mimetype:
 				# Add the attachment if it is not whitelisted (in terms of filename or filetype)
@@ -295,6 +292,11 @@ def parse_eml(internal_msg, wsl):
 	gen = email.generator.BytesGenerator(inmem_file)
 	gen.flatten(internal_msg)
 	eml_file_tuple = (inmem_file, filename)
+
+	# Workaround to prevent HTML tags to appear inside the URLs (splits on < or >)
+	for observable_body in observables_body:
+		if observable_body['type'] == "url":
+			observable_body['value'] = observable_body['value'].replace(">", "<").split("<")[0]
 
 	return subject_field, observables_header, observables_body, attachments, hashes_attachments, eml_file_tuple
 
