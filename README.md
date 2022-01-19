@@ -482,11 +482,12 @@ ThePhish is an open-source and free software released under the [AGPL](https://g
 
 ## Who talks about ThePhish
 - SecSI - https://secsi.io/blog/thephish-an-automated-phishing-email-analysis-tool/
+- The Daily Swig - https://portswigger.net/daily-swig/thephish-the-most-complete-non-commercial-phishing-email-analysis-tool
 
 ## Credits
 
-This project started in 2020 and an early and incomplete version of it was presented as my final work for the graduation at the [Cybersecurity HackAdemy](https://www.cyberhackademy.unina.it/en/home-page/) organized by the University of Naples Federico II. For that, I would like to thank my team that was composed by [gianpor](https://github.com/gianpor), [MrFelpon](https://github.com/MrFelpon) and [xdinax](https://github.com/xdinax), who helped me in the early stages of the development of the application with the initial deployment and the first tests. 
+This project started in 2020 and an early and incomplete version of it was presented as my final work for the graduation at the [Cybersecurity HackAdemy](https://www.cyberhackademy.unina.it/en/home-page/) organized by the University of Naples Federico II. For that, I would like to thank Roberto Celletti for the initial idea and my team which was composed by [gianpor](https://github.com/gianpor), [MrFelpon](https://github.com/MrFelpon) and [xdinax](https://github.com/xdinax), who helped me in the early stages of the development of the application with the initial deployment and the first tests. 
 
-Then I completely redesigned the tool in terms of functionality, logo and UI, added the support for Docker and wrote a thorough documentation in order to be presented as the final thesis for my master's degree in computer engineering in 2021 at the University of Naples Federico II with supervisor [spromano](https://github.com/spromano).
+Then I completely redesigned the tool in terms of functionality, logo and UI, added the support for Docker and wrote a thorough documentation in order to be presented as the final thesis for my master's degree in computer engineering in 2021 at the University of Naples Federico II with supervisor Simon Pietro Romano ([spromano](https://github.com/spromano)).
 
 I would also like to thank Xavier Mertens (xme) for having developed [IMAP2TheHive](https://github.com/xme/dockers/tree/master/imap2thehive) and published it on GitHub, since it has been the initial spark that led to the development of this project and from which the code of ThePhish has taken a cue.
