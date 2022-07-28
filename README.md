@@ -8,7 +8,8 @@
 
 ThePhish is an automated phishing email analysis tool based on [TheHive](https://github.com/TheHive-Project/TheHive), [Cortex](https://github.com/TheHive-Project/Cortex/) and [MISP](https://github.com/MISP/MISP). It is a web application written in Python 3 and based on Flask that automates the entire analysis process starting from the extraction of the observables from the header and the body of an email to the elaboration of a verdict which is final in most cases. In addition, it allows the analyst to intervene in the analysis process and obtain further details on the email being analyzed if necessary. In order to interact with TheHive and Cortex, it uses [TheHive4py](https://github.com/TheHive-Project/TheHive4py) and [Cortex4py](https://github.com/TheHive-Project/Cortex4py), which are the Python API clients that allow using the REST APIs made available by TheHive and Cortex respectively.
 
-![OS](https://img.shields.io/badge/OS-Linux-red?style=flat&logo=linux)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)<br>
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python%203.8-1f425f.svg?logo=python)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/Docker-available-green.svg?style=flat&logo=docker)](https://github.com/emalderson/ThePhish/tree/master/docker)
 [![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://github.com/emalderson/ThePhish)
@@ -175,7 +176,7 @@ This guide refers to the sole installation of ThePhish, which requires:
  - An up-and-running instance of Cortex
  - An up-and-running instance of MISP
  - An email address that users can use to send emails to ThePhish
- - A Linux-based OS with Python 3.8+ installed
+ - A Linux-based OS or a Windows based OS with Python 3.8+ installed
 
 In order to install, configure and integrate TheHive, Cortex and MISP instances, please refer to their official documentation: 
  - [TheHive documentation](https://docs.thehive-project.org/thehive/)
