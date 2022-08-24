@@ -167,7 +167,7 @@ ThePhish interacts with TheHive and Cortex thanks to TheHive4py and Cortex4py. M
 
 Since the installation and configuration of TheHive, Cortex and MISP services from scratch for a production environment may not be extremely straightforward, TheHive Project provides Docker images and Docker Compose templates [here](https://github.com/TheHive-Project/Docker-Templates) to facilitate the installation procedure. For the sake of simplicity, the provided templates are made simple, without providing the full configuration options of each docker image.
 
-If you only want to try ThePhish or you want to have it up and running as fast as possible, you can use the provided Docker Template in the `docker` folder, which is a modified version of one of the Docker Templates provided by TheHive Project that also allows creating a ThePhish container. To install ThePhish using Docker and Docker Compose, please refer to [this guide](https://github.com/emalderson/ThePhish/tree/master/docker). I strongly recommend that you install it this way at least the first time you use it so that you can learn the basics and how to configure it with a minimal configuration that should work on the first try. Indeed, the previously linked guide also provides a step-by-step procedure to configure the TheHive, Cortex and MISP instances.
+If you only want to try ThePhish or you want to have it up and running as fast as possible, you can use the provided Docker Template in the `docker` folder, which is a modified version of one of the Docker Templates provided by TheHive Project that also allows creating a ThePhish container. To install ThePhish using Docker and Docker Compose, please refer to [this guide](https://github.com/asterictnl-lvdw/ThePhish/tree/master/docker). I strongly recommend that you install it this way at least the first time you use it so that you can learn the basics and how to configure it with a minimal configuration that should work on the first try. Indeed, the previously linked guide also provides a step-by-step procedure to configure the TheHive, Cortex and MISP instances.
 
 ### Install it from scratch
 
@@ -176,7 +176,7 @@ This guide refers to the sole installation of ThePhish, which requires:
  - An up-and-running instance of Cortex
  - An up-and-running instance of MISP
  - An email address that users can use to send emails to ThePhish
- - A Linux-based OS or a Windows based OS with Python 3.8+ installed
+ - A Linux-based OS or a Windows-based OS with Python 3.8+ installed
 
 In order to install, configure and integrate TheHive, Cortex and MISP instances, please refer to their official documentation: 
  - [TheHive documentation](https://docs.thehive-project.org/thehive/)
@@ -185,13 +185,13 @@ In order to install, configure and integrate TheHive, Cortex and MISP instances,
 
 It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. The procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails is explained [here](https://support.google.com/accounts/answer/185833?hl=en).
 
-This installation procedure has been tested on a VM running Ubuntu 20.04.3 LTS with Python 3.8 installed and the versions of TheHive, Cortex and MISP shown in this [docker-compose.yml](https://github.com/emalderson/ThePhish/blob/master/docker/docker-compose.yml) file.
+This installation has been tested with both the Windows and Linux [docker-compose.yml](https://github.com/asterictnl-lvdw/ThePhish/tree/master/docker) file. They have been tested on a Windows 11 machine, and on Kali Linux, Ubuntu and Debian with at least Python 3.8+ installed.
 
 Once TheHive, Cortex and MISP are configured and listening at a certain URL and the email address is ready to use, you can install and configure ThePhish. 
 
  1. Clone the repository
 	```    
-	$ git clone https://github.com/emalderson/ThePhish.git
+	$ git clone https://github.com/asterictnl-lvdw/ThePhish.git
 	```
  2. Create a Python virtual environment and activate it (it is good practice but it is not required)
 	```     
@@ -394,7 +394,7 @@ The analyzers emphasized in *italic* are the ones for which the levels have been
 
 ### Enable the *MISP* analyzer
 
-In order to integrate Cortex with MISP, you must activate the *MISP_2_1* analyzer and configure it with the authentication key of the user created on MISP that Cortex will use to interact with MISP. This means that an organization and a user with `sync_user` role in that organization must be created on MISP beforehand (you can learn how to do that and obtain the authentication key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-misp-container) or [here (MISP documentation)](https://www.circl.lu/doc/misp/administration/#users).
+In order to integrate Cortex with MISP, you must activate the *MISP_2_1* analyzer and configure it with the authentication key of the user created on MISP that Cortex will use to interact with MISP. This means that an organization and a user with `sync_user` role in that organization must be created on MISP beforehand (you can learn how to do that and obtain the authentication key [here (ThePhish documentation, recommended)](https://github.com/asterictnl-lvdw/ThePhish/tree/master/docker#configure-the-misp-container) or [here (MISP documentation)](https://www.circl.lu/doc/misp/administration/#users).
 
 ### Enable the *Yara* analyzer
 

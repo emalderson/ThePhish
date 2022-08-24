@@ -1,0 +1,26 @@
+{
+	"imap" : {
+		"host" : "imap.gmail.com",
+		"port" : "993",
+		"user" : "example@gmail.com",
+		"password" : "",
+		"folder" : "inbox"
+	},
+	"thehive" : {
+		"url" : "http://thehive:9000",
+		"apikey" : "xXxXxXxXxXxXxXxXxXxXxXx"
+	},
+	"cortex" : {
+		"url" : "http://cortex:9001",
+		"apikey" : "xXxXxXxXxXxXxXxXxXxXxXx",
+		"id" : "local"
+	},
+	"misp" : {
+		"id" : "MISP THP"
+	},
+	"case" : {
+		"tlp" : "2",
+		"pap" : "2",
+		"tags" : ["email", "ThePhish"]
+	}
+}
