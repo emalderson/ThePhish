@@ -480,9 +480,18 @@ ThePhish uses a great feature of TheHive which is the possibility of exporting a
 
 ThePhish is an open-source and free software released under the [AGPL](https://github.com/emalderson/ThePhish/blob/master/LICENSE) (Affero General Public License).
 
+## Academic publications
+- ITASEC 2022: Italian Conference on Cybersecurity, June 20–23, 2022, Rome, Italy
+	- Link to the proceedings: https://ceur-ws.org/Vol-3260/
+	- Link to the paper: https://ceur-ws.org/Vol-3260/paper6.pdf
+
 ## Who talks about ThePhish
 - SecSI - https://secsi.io/blog/thephish-an-automated-phishing-email-analysis-tool/
 - The Daily Swig - https://portswigger.net/daily-swig/thephish-the-most-complete-non-commercial-phishing-email-analysis-tool
+
+## GitHub repositories mentioning ThePhish
+- [TheHive-Project/awesome](https://github.com/TheHive-Project/awesome)
+- [matiassingers/awesome-readme](https://github.com/matiassingers/awesome-readme)
 
 ## Credits
 
