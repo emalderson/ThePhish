@@ -34,6 +34,8 @@ ThePhish is an automated phishing email analysis tool based on [TheHive](https:/
 * [Use the whitelist](#use-the-whitelist)
 * [Contribution to TheHive4py](#contribution-to-thehive4py)
 * [License](#license)
+* [Academic publications](#academic-publications)
+* [GitHub repositories mentioning ThePhish](#github-repositories-mentioning-thephish)
 * [Who talks about ThePhish](#who-talks-about-thephish)
 * [Credits](#credits)
 
