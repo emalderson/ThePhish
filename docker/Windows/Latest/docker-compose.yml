@@ -1,0 +1,129 @@
+version: "3.8"
+services:
+
+  thehive:
+      image: strangebee/thehive:latest
+      container_name: thehive
+      depends_on:
+        - cassandra
+        - elasticsearch
+      mem_limit: 1500m
+      volumes:
+        - ./thehive/application.conf:/etc/thehive/application.conf
+      ports:
+        - "9000:9000"
+      environment:
+        - JVM_OPTS="-Xms1024M -Xmx1024M"
+      command: --no-config --no-config-secret  
+
+  cassandra:
+    image: 'cassandra:4'
+    container_name: cassandra
+    mem_limit: 1000m
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TheHive
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=1G
+      - num_tokens=256
+    volumes:
+      - cassandradata:/var/lib/cassandra
+      
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+    container_name: elasticsearch
+    mem_limit: 512m
+    ports:
+      - "9200:9200"
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - script.allowed_types=inline,stored
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=100000
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - elasticsearchdata:/usr/share/elasticsearch/data            
+
+  mysql:
+    image: mysql:8.0.30
+    container_name: mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - "MYSQL_USER=misp"
+      - "MYSQL_PASSWORD=example"
+      - "MYSQL_ROOT_PASSWORD=password"
+      - "MYSQL_DATABASE=misp"
+    volumes:
+      - ./vol/mysql:/var/lib/mysql
+
+  redis:
+    image: redis:6.2.7
+    container_name: redis
+    restart: unless-stopped
+
+  misp-modules:
+    image: coolacid/misp-docker:modules-latest
+    container_name: misp_modules
+    environment:
+      - "REDIS_BACKEND=redis"
+    depends_on:
+      - redis
+      - mysql
+
+  misp:
+    image: coolacid/misp-docker:core-latest
+    container_name: misp
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - mysql
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      - "MYSQL_HOST=mysql"
+      - "HOSTNAME=https://localhost"
+      - "REDIS_FQDN=redis"
+      - TIMEZONE=Europe/Amsterdam
+      - "INIT=true"
+      - "CRON_USER_ID=1"
+      - "DISIPV6=true"
+
+  cortex:
+      image: thehiveproject/cortex:latest
+      container_name: cortex
+      volumes:
+        - ./cortex/application.conf:/etc/cortex/application.conf
+        - //var/run/docker.sock:/var/run/docker.sock
+        - /var/run/cortex/jobs:/tmp/cortex-jobs
+      depends_on:
+        - thehive
+      ports:
+        - "9001:9001"
+      command:
+      - "--no-config"
+      - "--no-config-es"
+
+  thephish:
+    image: emalderson/thephish:latest
+    container_name: thephish
+    restart: unless-stopped
+    depends_on:
+      - thehive
+      - cortex
+      - misp
+    ports:
+      - '0.0.0.0:8080:8080'
+    volumes:
+      - ./thephish_conf_files/analyzers_level_conf.json:/root/thephish/analyzers_level_conf.json
+      - ./thephish_conf_files/configuration.json:/root/thephish/configuration.json
+      - ./thephish_conf_files/whitelist.json:/root/thephish/whitelist.json
+
+volumes:
+  cassandradata:
+  elasticsearchdata:
+  mysql_data:          

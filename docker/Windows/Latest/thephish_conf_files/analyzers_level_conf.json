@@ -1,0 +1,110 @@
+{
+	"DomainMailSPFDMARC_Analyzer_1_1" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "suspicious",
+			"suspicious" : "suspicious",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Malwares_GetReport_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Malwares_Scan_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"MISP_2_1" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "malicious",
+			"suspicious" : "malicious",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Onyphe_Summary_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"PassiveTotal_Malware_2_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Robtex_Reverse_PDNS_Query_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Robtex_Forward_PDNS_Query_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Robtex_IP_Query_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Threatcrowd_1_0" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "malicious",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"Urlscan_io_Search_0_1_1" : {
+		"dataType" : ["url", "ip", "domain", "mail"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	},
+	"VirusTotal_GetReport_3_0" : {
+		"dataType" : ["ip", "domain"],
+		"levelMapping" : {
+			"malicious" : "info",
+			"suspicious" : "info",
+			"safe" : "safe",
+			"info" : "info"
+		}
+	}
+}

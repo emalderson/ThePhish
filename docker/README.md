@@ -3,6 +3,12 @@
 <img align="right" src="../pictures/dockerwhale.png" width="420">
 
 This folder contains the `docker-compose.yml` file needed to start ThePhish and all the required services with Docker Compose. It uses the following images:
+
+- Windows
+- Linux
+
+For Linux currently there is only one version that is synced with the main branch containing:
+
 - [cassandra:3.11](https://hub.docker.com/_/cassandra)
 - [thehiveproject/thehive4:4.1.9-1](https://hub.docker.com/r/thehiveproject/thehive4)
 - [docker&#46;elastic&#46;co/elasticsearch/elasticsearch:7.11.1](https://www.docker.elastic.co/r/elasticsearch/elasticsearch:7.11.1)
@@ -12,11 +18,23 @@ This folder contains the `docker-compose.yml` file needed to start ThePhish and 
 - [coolacid/misp-docker:core-v2.4.148a](https://hub.docker.com/r/coolacid/misp-docker)
 - [emalderson/thephish:latest](https://hub.docker.com/r/emalderson/thephish)
 
+For Windows there are two versions. One that is synced with the main branch but made compatible to run on a Windows environment with all the versions stated above and one with all containers updated to their latest version. Both docker-compose files have been tested and configured with the instructions down below. The latest version contains:
+
+- [cassandra:4](https://hub.docker.com/_/cassandra)
+- [strangebee/thehive:latest](https://hub.docker.com/r/strangebee/thehive)
+- [elasticsearch/elasticsearch:7.17.5](https://hub.docker.com/_/elasticsearch)
+- [thehiveproject/cortex:latest](https://hub.docker.com/r/thehiveproject/cortex)
+- [redis:6.2.7](https://hub.docker.com/_/redis)
+- [mysql:8.0.30](https://hub.docker.com/_/mysql)
+- [coolacid/misp-docker:core-latest](https://hub.docker.com/r/coolacid/misp-docker)
+- [coolacid/misp-docker:modules-latest](https://hub.docker.com/r/coolacid/misp-docker)
+- [emalderson/thephish:latest](https://hub.docker.com/r/emalderson/thephish)
+
 These images are used with a minimal configuration. You can change the default parameters that are provided in the `docker-compose.yml` file. Moreover, it is possible to use additional settings by following the configuration guides available for those images.
 
 This folder also contains three subfolders that contain the configuration files used by TheHive, Cortex and ThePhish and that will be mounted as volumes in the respective containers.
 
-In order to use this installation method, it is required to have a Linux-based OS with Docker 19.03.0+ and Docker Compose 1.25.5+ installed. The guide to install Docker can be found [here](https://docs.docker.com/engine/install/), while the guide to install Docker Compose can be found [here](https://docs.docker.com/compose/install/).
+For Linux and Windows both installation methods work. For Linux it is required to have at least Docker 19.03.0 or later installed including Docker Compose 1.25.5 or later. The guide to install Docker can be found [here](https://docs.docker.com/engine/install/), while the guide to install Docker Compose can be found [here](https://docs.docker.com/compose/install/).
 
 This guide will not only show you how to run the containers but also how to configure them so that you'll be able to analyze your first email.
 
@@ -24,25 +42,27 @@ This guide will not only show you how to run the containers but also how to conf
 
 1. Clone the repository
     ```
-    $ git clone https://github.com/emalderson/ThePhish.git
+    $ git clone https://github.com/asterictnl-lvdw/ThePhish
     ```
 
-2. Run the multi-container application.
+2. Navigate to the respective directory based on your OS choice and run
 
     ```
-    $ cd ThePhish/docker
     $ docker-compose up
     ```
   
 
-3. If the logs start showing many errors, this is because you need to change the ownership of some folders. Indeed, a new folder called `vol` will be created that will be used by the various containers to store data. You need to change the owner of some of its subfolders to match the user that has run the `docker-compose up` command so that the containers will be able to access their content.
+**For Linux:**
+
+If the logs start showing many errors, this is because you need to change the ownership of some folders. Indeed, a new folder called `vol` will be created that will be used by the various containers to store data. You need to change the owner of some of its subfolders to match the user that has run the `docker-compose up` command so that the containers will be able to access their content.
 In order to do that, you need to stop the application, apply the change of ownership and then restart the application.
+
     ```
     $ docker-compose stop
-    $ sudo chown -R 1000:1000 vol/index vol/data vol/elastic*
+    $ sudo chown -R 1000:1000 vol/index vol/data vol/elastic* 
     $ docker-compose up
-    ```
-	This must be done once all the files in those folders have been created. If you face the same errors after having followed this procedure, try waiting some time (minutes) and re-execute the command to change the ownership of those folders recursively.
+    ```  
+This must be done once all the files in those folders have been created. If you face the same errors after having followed this procedure, try waiting some time (minutes) and re-execute the command to change the ownership of those folders recursively.
 
 ### Configure the IMAP server
 
