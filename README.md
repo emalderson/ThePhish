@@ -182,7 +182,7 @@ This guide refers to the sole installation of ThePhish, which requires:
 
 In order to install, configure and integrate TheHive, Cortex and MISP instances, please refer to their official documentation: 
  - [TheHive documentation](https://docs.thehive-project.org/thehive/)
- - [Cortex documentation](https://github.com/TheHive-Project/CortexDocs)
+ - [Cortex documentation](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/)
  - [MISP documentation](https://www.misp-project.org/documentation/)
 
 It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. The procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails is explained [here](https://support.google.com/accounts/answer/185833?hl=en).
@@ -260,7 +260,7 @@ Once TheHive, Cortex and MISP are configured and listening at a certain URL and 
 	 - In the *misp* part you only have to set the ID given to the MISP instance.
 	 - In the *case* part you can set the default TLP and PAP levels for the cases created by ThePhish and also the tags that will be applied to them at their creation.
 	 
-	 You can learn how to create an organization and a user with `org-admin` role in that organization on TheHive and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-thehive-container) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/legacy/thehive3/admin/admin-guide/). Similarly, you can learn how to create an organization and a user with `read, analyze` roles in that organization on Cortex and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-cortex-container) or [here (Cortex documentation)](https://github.com/TheHive-Project/CortexDocs/blob/master/admin/admin-guide.md#users).
+	 You can learn how to create an organization and a user with `org-admin` role in that organization on TheHive and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-thehive-container) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/legacy/thehive3/admin/admin-guide/). Similarly, you can learn how to create an organization and a user with `read, analyze` roles in that organization on Cortex and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-cortex-container) or [here (Cortex documentation)](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/admin/admin-guide.md#users).
 	 
 	 The URLs and the IDs that are set in this file must be the same that are set in the configuration file of TheHive named `application.conf`, which contains a part related to Cortex and a part related to MISP. The parameters that you should look for are `name` and `url` in both parts, which correspond to the IDs and the URLs of the Cortex and MISP instances. The IDs can also be found in the *About* window on the web interface of TheHive. An example where the Cortex ID is the string `local` and the MISP ID is the string `MISP THP` is shown in the following figure:
 
@@ -291,7 +291,7 @@ Once TheHive, Cortex and MISP are configured and listening at a certain URL and 
 
 ## Configure the analyzers
 
-ThePhish can start an analyzer or a responder only if it is enabled and correctly configured on Cortex. [This](https://github.com/TheHive-Project/CortexDocs/blob/master/admin/admin-guide.md#organizations-users-and-analyzers) part of the documentation explains how to enable them, while [this](https://github.com/TheHive-Project/CortexDocs/blob/master/analyzer_requirements.md) part lists the available analyzers and responders with their configuration parameters. It should be noted that while many analyzers are free to use, some require special access and others necessitate a valid service subscription or product license.
+ThePhish can start an analyzer or a responder only if it is enabled and correctly configured on Cortex. [This](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/admin/admin-guide.md#organizations-users-and-analyzers) part of the documentation explains how to enable them, while [this](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/analyzer_requirements.md) part lists the available analyzers and responders with their configuration parameters. It should be noted that while many analyzers are free to use, some require special access and others necessitate a valid service subscription or product license.
 
 ### Configure the levels of the analyzers
 

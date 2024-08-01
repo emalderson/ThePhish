@@ -165,7 +165,7 @@ Now, on Cortex, while logged in with the orgadmin user, do the following:
 
 On Cortex, while logged in with the orgadmin user, do the following:
 1. Organization -> Analyzers
-2. Enable the desired analyzers and configure them (following [this](https://github.com/TheHive-Project/CortexDocs/blob/master/analyzer_requirements.md) guide)
+2. Enable the desired analyzers and configure them (following [this](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/analyzer_requirements.md) guide)
 
 **:warning: Warning**: The *Yara_2_0* analyzer does not work if you use this installation method (it will never find any match). In fact, it needs a folder that contains the Yara rules to use that should also be specified in the configuration of the analyzer in Cortex, but there is no way to make this folder visible to the analyzer. This is because, as already explained, the analyzers are executed as Docker containers and in this case the Yara container is automatically started without specifying any volume, making it impossible for the analyzer to access any Yara rule. 
 
