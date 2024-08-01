@@ -317,20 +317,11 @@ Furthermore, these levels do not always represent the real maliciousness level o
 			"safe" : "safe",
 			"info" : "info"
 		}
-	},
-	"VirusTotal_GetReport_3_0" : {
-		"dataType" : ["ip", "domain"],
-		"levelMapping" : {
-			"malicious" : "info",
-			"suspicious" : "info",
-			"safe" : "safe",
-			"info" : "info"
-		}
 	}
 }
 ```
 
-In this example, the level "suspicious" for the *MISP_2_1* analyzer is raised to "malicious" since it indicates that some observables in the email being currently analyzed have already been sighted in a previously analyzed email for which the verdict was "malicious". Conversely, the level "malicious" of the *DomainMailSPFDMARC_Analyzer_1_1* analyzer is lowered to "suspicious", since many legitimate domains do not have DMARC and SPF records configured. Moreover, the levels "suspicious" and "malicious" given by the *VirusTotal_GetReport_3_0* analyzer for IP addresses and domains are lowered to "info" since they have been observed to lead to lots of false positives. 
+In this example, the level "suspicious" for the *MISP_2_1* analyzer is raised to "malicious" since it indicates that some observables in the email being currently analyzed have already been sighted in a previously analyzed email for which the verdict was "malicious". Conversely, the level "malicious" of the *DomainMailSPFDMARC_Analyzer_1_1* analyzer is lowered to "suspicious", since many legitimate domains do not have DMARC and SPF records configured. 
 
 You can add or remove analyzers in this file at your will, but I recommend that you leave the ones that are already present in the file untouched since those modifications have been motivated by many tests performed on a lot of different emails.
 
@@ -378,8 +369,8 @@ ThePhish has been tested with the following analyzers:
 - **URLhaus_2_0** 
 - Urlscan_io_Scan_0_1_0 
 - *Urlscan_io_Search_0_1_1* 
-- *VirusTotal_GetReport_3_0*
-- VirusTotal_Scan_3_0 
+- VirusTotal_GetReport_3_1
+- VirusTotal_Scan_3_1
 - Yara_2_0
 
 The analyzers emphasized in *italic* are the ones for which the levels have been modified (but that can be overridden, even though it is not advisable), while the analyzers emphasized in **bold** are the ones that are handled directly in the code of ThePhish either because they do not respect the convention for the report structure, or because they have bugs. Moreover, the following analyzers are handled in the code of ThePhish to use them in the best possible manner:

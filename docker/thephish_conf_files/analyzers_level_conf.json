@@ -97,14 +97,5 @@
 			"safe" : "safe",
 			"info" : "info"
 		}
-	},
-	"VirusTotal_GetReport_3_0" : {
-		"dataType" : ["ip", "domain"],
-		"levelMapping" : {
-			"malicious" : "info",
-			"suspicious" : "info",
-			"safe" : "safe",
-			"info" : "info"
-		}
 	}
 }
