@@ -465,6 +465,9 @@ Here is shown a toy example of the `whitelist.json` file.
 ```
 
 While both the parts related to exact matching and regex matching are used without any modification, the remaining parts are used to create three more lists of regular expressions. It is not required for you to design complex regular expressions to enable those features, but you only need to add the domains to the right lists and ThePhish will do the rest. For instance, in the example shown above, not only the domain "paypal&#46;com" is filtered, but any subdomain, URL and email address containing the domain "paypal&#46;com" is filtered as well. These regular expressions have been designed to avoid some unwanted behaviors, for instance they prevent domains like "paypal&#46;com&#46;attacker&#46;com" to be mistakenly whitelisted.
+
+**Note**: If you add a domain under "domainsInSubdomains," the domain itself will also be filtered. Therefore, adding the same domain to the list of domains under "exactMatching" is unnecessary. The distinction is made for cases where only the domain needs to be whitelisted, not its subdomains. Thus, in this example, including "paypal&#46;com" in both lists is redundant.
+
 The whitelist file which is provided in this repository is already populated with some whitelisted observables, but it is just an example, you can (and should) edit it to suit your needs by removing or adding elements.
 
 
