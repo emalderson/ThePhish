@@ -33,10 +33,11 @@ ThePhish is an automated phishing email analysis tool based on [TheHive](https:/
 * [Enable the *Mailer* responder](#enable-the-mailer-responder)
 * [Use the whitelist](#use-the-whitelist)
 * [Contribution to TheHive4py](#contribution-to-thehive4py)
+* [Contribution to Cortex-Analyzers](#contribution-to-cortex-analyzers)
 * [License](#license)
 * [Academic publications](#academic-publications)
-* [GitHub repositories mentioning ThePhish](#github-repositories-mentioning-thephish)
 * [Who talks about ThePhish](#who-talks-about-thephish)
+* [GitHub repositories mentioning ThePhish](#github-repositories-mentioning-thephish)
 * [Credits](#credits)
 
 
@@ -338,12 +339,14 @@ ThePhish has been tested with the following analyzers:
 - Fortiguard_URLCategory_2_1
 - IPinfo_Details_1_0
 - **IPVoid_1_0** 
+- KasperskyThreatIntelligencePortal_1_0
 - Maltiverse_Report_1_0
 - *Malwares_GetReport_1_0* 
 - *Malwares_Scan_1_0*
 - MaxMind_GeoIP_4_0 
 - MetaDefenderCloud_GetReport_1_0
 - *MISP_2_1*
+- NERD_1_0
 - *Onyphe_Summary_1_0*
 - OTXQuery_2_0
 - PassiveTotal_Enrichment_2_0 
@@ -468,6 +471,13 @@ The whitelist file which is provided in this repository is already populated wit
 ## Contribution to TheHive4py
 
 ThePhish uses a great feature of TheHive which is the possibility of exporting a case to MISP as an event. This makes it possible to use the *MISP_2_1* analyzer to search for a match between an observable in a case and an attribute of one of those events on MISP. Unfortunately, during the first development stages of ThePhish, a function that allowed to do this via API in Python was not available in TheHive4py yet. For this reason, a pull request ([#187](https://github.com/TheHive-Project/TheHive4py/pull/187)) has been made to TheHive4py to add such functionality. The pull request has been accepted and the function `export_to_misp()` has been added to the 1.8.0 milestone of TheHive4py.
+
+## Contribution to Cortex-Analyzers
+
+ThePhish heavily relies on the analyzers provided by Cortex. To ensure they continue to function as intended, pull requests are made to the repository that contains them. Here is an updated list of such pull requests:
+- KasperskyTIP fix: previously ignored category orange now is malicious ([#1270](https://github.com/TheHive-Project/Cortex-Analyzers/pull/1270))
+- PhishTank fix: add User-Agent header to make phishtank api work again ([#1271](https://github.com/TheHive-Project/Cortex-Analyzers/pull/1271))
+- SpamHausDBL fix: replace query function (not working) with resolve function ([#1272](https://github.com/TheHive-Project/Cortex-Analyzers/pull/1272))
 
 ## License
 
