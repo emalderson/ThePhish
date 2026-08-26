@@ -1,5 +1,4 @@
 import logging.config
-import imaplib
 import io
 import json
 import base64
@@ -11,6 +10,7 @@ import urllib.parse
 import traceback
 import ioc_finder
 import thehive4py.api, thehive4py.models, thehive4py.query
+import imap_connection
 
 # Global variable used for logging
 log = None
@@ -26,12 +26,12 @@ whitelist = {}
 
 
 def connect_to_IMAP_server(wsl):
-	# Create the connection to the IMAP server using host and port
-	connection = imaplib.IMAP4_SSL(config['imapHost'], config['imapPort'])
-	# Log in using username and password
-	connection.login(config['imapUser'],config['imapPassword'])
-	log.info('Connected to email {0} server {1}:{2}/{3}'.format(config['imapUser'], config['imapHost'], config['imapPort'], config['imapFolder']))
-	wsl.emit_info('Connected to email {0} server {1}:{2}/{3}'.format(config['imapUser'], config['imapHost'], config['imapPort'], config['imapFolder']))
+	connection = imap_connection.connect(config['imap'])
+	message = 'Connected to email {0} server {1}:{2}/{3} using {4} authentication'.format(
+		config['imap']['user'], config['imap']['host'], config['imap']['port'],
+		config['imap']['folder'], config['imap']['authentication'])
+	log.info(message)
+	wsl.emit_info(message)
 	return connection
 
 
@@ -107,7 +107,7 @@ def search_observables(buffer, wsl):
 def obtain_eml(connection, mail_uid, wsl):
 
 	# Read all the unseen emails from this folder
-	connection.select(config['imapFolder'])
+	connection.select(config['imap']['folder'])
 	typ, dat = connection.search(None, '(UNSEEN)')
 
 	# The dat[0] variable contains the IDs of all the unread emails
@@ -452,11 +452,7 @@ def main(wsl, mail_uid):
 			conf_dict = json.load(conf_file)
 			
 			# IMAP configuration
-			config['imapHost'] = conf_dict['imap']['host']
-			config['imapPort'] = int(conf_dict['imap']['port'])
-			config['imapUser'] = conf_dict['imap']['user']
-			config['imapPassword'] = conf_dict['imap']['password']
-			config['imapFolder'] = conf_dict['imap']['folder']
+			config['imap'] = imap_connection.load_config(conf_dict)
 
 			# TheHive configuration
 			config['thehiveURL'] = conf_dict['thehive']['url']

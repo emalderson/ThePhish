@@ -3,8 +3,15 @@
 		"host" : "imap.gmail.com",
 		"port" : "993",
 		"user" : "",
+		"authentication" : "password",
 		"password" : "",
-		"folder" : "inbox"
+		"folder" : "inbox",
+		"oauth2" : {
+			"tenant_id" : "",
+			"client_id" : "",
+			"client_secret" : "",
+			"scope" : "https://outlook.office365.com/.default"
+		}
 	},
 	"thehive" : {
 		"url" : "http://thehive:9000",

@@ -1,11 +1,11 @@
 import logging.config
-import imaplib
 import json
 import email
 import base64
 import traceback
 import bs4
 import magic
+import imap_connection
 
 # Global variable used for logging
 log = None
@@ -15,17 +15,16 @@ config = {}
 
 
 def connect_to_IMAP_server():
-	# Create the connection to the IMAP server using host and port
-	connection = imaplib.IMAP4_SSL(config['imapHost'], config['imapPort'])
-	# Log in using username and password
-	connection.login(config['imapUser'], config['imapPassword'])
-	log.info('Connected to {0}@{1}:{2}/{3}'.format(config['imapUser'], config['imapHost'], config['imapPort'], config['imapFolder']))
+	connection = imap_connection.connect(config['imap'])
+	log.info('Connected to {0}@{1}:{2}/{3} using {4} authentication'.format(
+		config['imap']['user'], config['imap']['host'], config['imap']['port'],
+		config['imap']['folder'], config['imap']['authentication']))
 	return connection
 
 # Fetch all the unread emails in the specified folder that have an EML attachment and return their information
 def retrieve_emails(connection):
 	# Read all the unseen email from this folder
-	connection.select(config['imapFolder'])
+	connection.select(config['imap']['folder'])
 	typ, dat = connection.search(None, '(UNSEEN)')
 	# The dat[0] variable contains the IDs of all the unread emails
 	# The IDs are obtained by using the split function and the length of the array is the number of unread emails
@@ -228,11 +227,7 @@ def main():
 			conf_dict = json.load(conf_file)
 			
 			# IMAP config
-			config['imapHost'] = conf_dict['imap']['host']
-			config['imapPort'] = int(conf_dict['imap']['port'])
-			config['imapUser'] = conf_dict['imap']['user']
-			config['imapPassword'] = conf_dict['imap']['password']
-			config['imapFolder'] = conf_dict['imap']['folder']
+			config['imap'] = imap_connection.load_config(conf_dict)
 
 	except Exception as e: 
 		log.error("Error while trying to open the file 'configuration.json': {}".format(traceback.format_exc()))
@@ -252,4 +247,3 @@ def main():
 		log.error("Error while trying to retrieve the emails: {}".format(traceback.format_exc()))
 		return
 	return emails_info
-

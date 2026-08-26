@@ -44,9 +44,9 @@ In order to do that, you need to stop the application, apply the change of owner
     ```
 	This must be done once all the files in those folders have been created. If you face the same errors after having followed this procedure, try waiting some time (minutes) and re-execute the command to change the ownership of those folders recursively.
 
-### Configure the IMAP server
+### Configure the mailbox
 
-It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. [Here](https://support.google.com/accounts/answer/185833?hl=en) is explained the procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails.
+Use a dedicated mailbox for ThePhish. Gmail can be connected with an app password, while Microsoft 365 mailboxes can use OAuth2 client credentials so that no mailbox password has to be stored. [Here](https://support.google.com/accounts/answer/185833?hl=en) is explained the procedure to activate a Gmail app password.
 
 Let's suppose that a Gmail address will be used. Once the email address is ready to use, edit the *imap* part of the file`thephish_conf_files/configuration.json` so that it looks like this:
 
@@ -55,10 +55,32 @@ Let's suppose that a Gmail address will be used. Once the email address is ready
 	"host" : "imap.gmail.com",
 	"port" : "993",
 	"user" : "<YourEmailAddress>",
+	"authentication" : "password",
 	"password" : "<YourEmailAddressAppPassword>",
 	"folder" : "inbox"
 }
 ```
+
+For unattended access to a Microsoft 365 mailbox, register an application in Microsoft Entra ID, add the **Office 365 Exchange Online** application permission `IMAP.AccessAsApp`, grant admin consent, register its service principal in Exchange Online, and grant that service principal `FullAccess` to the mailbox. Then use this configuration:
+
+```json
+"imap" : {
+	"host" : "outlook.office365.com",
+	"port" : "993",
+	"user" : "thephish@example.com",
+	"authentication" : "oauth2",
+	"password" : "",
+	"folder" : "inbox",
+	"oauth2" : {
+		"tenant_id" : "<TenantId>",
+		"client_id" : "<ApplicationClientId>",
+		"client_secret" : "<ClientSecret>",
+		"scope" : "https://outlook.office365.com/.default"
+	}
+}
+```
+
+See the [main Microsoft 365 OAuth2 configuration guide](../README.md#microsoft-365-oauth2-configuration) for the required Exchange Online commands. Do not commit real client secrets.
 
 ### Configure the MISP container
 
