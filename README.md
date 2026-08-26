@@ -185,7 +185,7 @@ In order to install, configure and integrate TheHive, Cortex and MISP instances,
  - [Cortex documentation](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/)
  - [MISP documentation](https://www.misp-project.org/documentation/)
 
-It is advisable that the email address from which ThePhish fetches the emails to analyze be a Gmail address since it is the one with which ThePhish has been tested the most. It is preferable that the account is a newly created one, with the sole purpose of being used by ThePhish. The procedure to activate the app password that is required by ThePhish to connect to the mailbox and fetch the emails is explained [here](https://support.google.com/accounts/answer/185833?hl=en).
+Use a dedicated mailbox for ThePhish. Gmail can be connected with an app password, while Microsoft 365 mailboxes can use OAuth2 client credentials so that no mailbox password has to be stored. The procedure to activate a Gmail app password is explained [here](https://support.google.com/accounts/answer/185833?hl=en); Microsoft 365 OAuth2 setup is documented in the configuration section below.
 
 This installation procedure has been tested on a VM running Ubuntu 20.04.3 LTS with Python 3.8 installed and the versions of TheHive, Cortex and MISP shown in this [docker-compose.yml](https://github.com/emalderson/ThePhish/blob/master/docker/docker-compose.yml) file.
 
@@ -232,8 +232,15 @@ Once TheHive, Cortex and MISP are configured and listening at a certain URL and 
 			"host" : "imap.gmail.com",
 			"port" : "993",
 			"user" : "",
+			"authentication" : "password",
 			"password" : "",
-			"folder" : "inbox"
+			"folder" : "inbox",
+			"oauth2" : {
+				"tenant_id" : "",
+				"client_id" : "",
+				"client_secret" : "",
+				"scope" : "https://outlook.office365.com/.default"
+			}
 		},
 		"thehive" : {
 			"url" : "http://thehive:9000",
@@ -254,11 +261,44 @@ Once TheHive, Cortex and MISP are configured and listening at a certain URL and 
 		}
 	}
 	```
-	- In the *imap* part, if you are using a Gmail address, you only need to set the username used to connect to the IMAP server (which is your email address) and the app password.
+	- In the *imap* part, set `authentication` to `password` to use the existing username and password login. Configurations without the `authentication` field continue to use password authentication. To use Microsoft 365 OAuth2, set it to `oauth2`; the password is then ignored.
 	 - In the *thehive* part you have to set the URL at which the TheHive instance is reachable and set the API key of the user created on TheHive that ThePhish will use to interact with TheHive.
 	 - In the *cortex* part you have to set the URL at which the Cortex instance is reachable and set the API key of the user created on Cortex that both ThePhish and TheHive will use to interact with Cortex. Moreover, you have to set the ID given to the Cortex instance.
 	 - In the *misp* part you only have to set the ID given to the MISP instance.
 	 - In the *case* part you can set the default TLP and PAP levels for the cases created by ThePhish and also the tags that will be applied to them at their creation.
+
+	#### Microsoft 365 OAuth2 configuration
+
+	ThePhish supports the OAuth2 client credentials flow for unattended access to a Microsoft 365 mailbox over IMAP. Configure Microsoft Entra ID and Exchange Online as follows:
+
+	1. Register an application in Microsoft Entra ID and create a client secret.
+	2. Add the **Office 365 Exchange Online** application permission `IMAP.AccessAsApp` and grant tenant-wide admin consent.
+	3. Register the application's service principal in Exchange Online and grant it access only to the mailbox used by ThePhish. The object ID must be taken from the **Enterprise application**, not from the App registration:
+		```powershell
+		Connect-ExchangeOnline -Organization <tenant-id>
+		New-ServicePrincipal -AppId <application-client-id> -ObjectId <enterprise-application-object-id>
+		$servicePrincipal = Get-ServicePrincipal -Identity <application-client-id>
+		Add-MailboxPermission -Identity "thephish@example.com" -User $servicePrincipal.Identity -AccessRights FullAccess
+		```
+	4. Configure the mailbox connection:
+		```json
+		"imap" : {
+			"host" : "outlook.office365.com",
+			"port" : "993",
+			"user" : "thephish@example.com",
+			"authentication" : "oauth2",
+			"password" : "",
+			"folder" : "inbox",
+			"oauth2" : {
+				"tenant_id" : "<tenant-id>",
+				"client_id" : "<application-client-id>",
+				"client_secret" : "<client-secret>",
+				"scope" : "https://outlook.office365.com/.default"
+			}
+		}
+		```
+
+	The token endpoint defaults to `https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token`. A different client-credentials-compatible provider can be used by setting an optional `oauth2.token_url`. Protect `configuration.json` as a secret and never commit real credentials.
 	 
 	 You can learn how to create an organization and a user with `org-admin` role in that organization on TheHive and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-thehive-container) or [here (TheHive documentation)](https://docs.thehive-project.org/thehive/legacy/thehive3/admin/admin-guide/). Similarly, you can learn how to create an organization and a user with `read, analyze` roles in that organization on Cortex and obtain its API key [here (ThePhish documentation, recommended)](https://github.com/emalderson/ThePhish/tree/master/docker#configure-the-cortex-container) or [here (Cortex documentation)](https://github.com/TheHive-Project/CortexDocs/blob/f2b9ce062ae87b7973fbb9c16a07f694967c6780/admin/admin-guide.md#users).
 	 
